@@ -9,6 +9,7 @@ import {ClassDetailsComponent} from "../classes-details/class-details.component"
     ClassDetailsComponent
   ],
   template: `
+    <h1>List of classes</h1>
     @if (!this.classCount) {
       <i>loading</i>
     } @else {

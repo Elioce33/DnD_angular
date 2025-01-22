@@ -9,6 +9,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
     { provide: BASE_URL, useValue: 'https://www.dnd5eapi.co' },
-    provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes)
   ]
 };
