@@ -1,0 +1,30 @@
+.container {
+  border: 1px solid white;
+  margin: 10px;
+  padding: 10px;
+}
+
+.spells {
+  border: 1px solid white;
+
+  position: relative;
+  width: 98%;
+  margin: auto;
+  display: flex;
+  padding: 20px;
+}
+
+.array, .details {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 25px;
+  display: inline-block;
+  width: 50%;
+  margin: 5px;
+  padding: 10px;
+}
+
+.array {
+}
+
+.details {
+}
