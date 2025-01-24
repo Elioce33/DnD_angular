@@ -2,6 +2,7 @@
   border: 2px solid darkred;
   border-radius: 25px;
   background-color: #d3a9a9;
+  padding: 20px;
 }
 
 .classDetails h2 {
@@ -9,42 +10,11 @@
 }
 
 .classDetails .info {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(2, auto);
-  grid-gap: 20px;
-  padding: 20px
+  /*display: grid;*/
+  /*grid-template-columns: repeat(12, 1fr);*/
+  /*grid-template-rows: repeat(2, auto);*/
+  /*grid-gap: 20px;*/
 }
-
-.proficiencies, .spellcasting {
-  border-radius: 25px;
-  padding: 5px;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.proficiencies {
-  grid-column: 1 / 4;
-  grid-row: 1 / 3;
-}
-
-.spellcasting {
-  grid-column: 5 / -1;
-}
-
-.spellcasting h3 {
-  text-align: center;
-}
-
-.spellcasting .container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-
-
-
-
-
 
 .clickable {
   cursor: pointer;

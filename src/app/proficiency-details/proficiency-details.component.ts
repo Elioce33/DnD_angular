@@ -6,7 +6,7 @@ import {ApiService} from '../api.service';
   imports: [],
   template: `
     <div>
-      <h3>{{this.proficiencyDetails.name}} details :</h3>
+      <h4>{{this.proficiencyDetails.name}} details :</h4>
       <p>type : {{this.proficiencyDetails.type}}</p>
       <div>
         <span>{{this.proficiencyDetails.type}} list : </span>

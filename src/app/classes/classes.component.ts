@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import {ApiService} from "../api.service";
 import { DndClassRequestResults } from './classes.interface';
 import {ClassDetailsComponent} from "../classes-details/class-details.component";
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-classes',
   imports: [
-    ClassDetailsComponent
+    ClassDetailsComponent,
+    NgClass
   ],
   template: `
     <h1>List of classes</h1>
@@ -21,7 +23,7 @@ import {ClassDetailsComponent} from "../classes-details/class-details.component"
           <p>Class list : </p>
           <ul>
             @for (dndClass of this.classes; track dndClass.index) {
-              <li class="{{selectedClass === dndClass.index ? 'selected' : ''}}">
+              <li [ngClass]="{selected : selectedClass === dndClass.index}">
                 <div class="classListItem">
                   {{ dndClass.name }}
                 </div>
@@ -56,6 +58,7 @@ export class ClassesComponent {
 
   displayClass(selected: string):void  {
     this.selectedClass = selected;
+    console.log("------------------");
     console.log("New class selected", this.selectedClass);
   }
 

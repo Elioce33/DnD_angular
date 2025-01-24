@@ -1,0 +1,31 @@
+.spellcasting h3, .proficiencies h3 {
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.container .list {
+  grid-column: 1;
+}
+
+.container .details {
+  grid-column: 2 / -1;
+}
+
+.container .description {
+
+}
+
+.clickable {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.clickable:hover {
+  cursor: pointer;
+  color: darkred;
+  text-decoration: none;
+}

@@ -1,60 +1,62 @@
-import {Component, Input, input} from '@angular/core';
+import {Component, Input, input, ViewChild, ViewContainerRef} from '@angular/core';
 import {ApiService} from '../api.service';
 import {Proficiencies, Spellcasting} from './class-details.interface';
+import {Spells} from '../spells/spells.interfaces';
+import {TabComponent} from '../tab/tab.component';
+import {TabItemComponent} from '../tab/tab-item.component';
+import {SpellListWithDetailComponent} from './spell-list-with-detail.component';
+import {NgIf} from '@angular/common';
 import {ProficiencyDetailsComponent} from '../proficiency-details/proficiency-details.component';
+import {ProficiencyListWithDetailComponent} from './proficiency-list-with-detail.component';
 
 @Component({
   selector: 'app-class-details',
   imports: [
-    ProficiencyDetailsComponent
+    TabComponent,
+    TabItemComponent,
+    SpellListWithDetailComponent,
+    NgIf,
+    ProficiencyDetailsComponent,
+    ProficiencyListWithDetailComponent
   ],
   template: `
     <div class="classDetails">
       <h2>{{ classDetails.name }}</h2>
-      <div class="info">
-        <div class="proficiencies">
-          <h3>Proficiencies</h3>
-          <div>
-            <ul>
-              @for (proficiency of classDetails.proficiencies; track proficiency.index) {
-                <li>
-                  <a class="clickable" (click)="proficiencyDetails(proficiency)">{{ proficiency.name }}</a>
-                </li>
-              }
-            </ul>
-          </div>
-          <div>
-            @if (!selectedProficiency) {
-              Select a proficiency to show more information
-            } @else {
-              <app-proficiency-details [proficiencyIndex]="selectedProficiency.index"/>
-            }
+      <div class="levelSelector">
+        <p>
+          Select a level :
+          @for (idx of [1, 2, 3, 4, 5, 6, 7, 8, 9]; track idx) {
+            <button (click)="selectLevel(idx)">{{ idx }}</button>
+          }
+        </p>
+        <p>Selected level : {{classLevel}}</p>
+        <p>Spell casting : {{doSpell}}</p>
+      </div>
 
+      <div class="info">
+        @if (classLevel) {
+          <div class="container">
+            <app-tab>
+              <!--TODO : find a way to remove a item-->
+              @if (doSpell) {
+                <app-tab-item tabTitle="Spells" [templateRef]="spells_template" />
+                <app-tab-item tabTitle="Equipment" [templateRef]="equipment_template" />
+              } @else {
+                <app-tab-item tabTitle="Equipment" [templateRef]="equipment_template"/>
+              }
+            </app-tab>
+
+            <ng-template #spells_template>
+              <app-spells-list-with-detail [spellList]="getSpellsByLevels(classLevel)" />
+            </ng-template>
+            <ng-template #equipment_template>
+              <app-proficiency-list-with-details [proficienciesList]="this.classDetails.proficiencies" />
+            </ng-template>
           </div>
-        </div>
-        @if (classDetails.spellcasting) {
-          <div class="spellcasting">
-            <h3>Spell casting </h3>
-            <div class="container">
-              <div>
-                <ul>
-                  @for (spell of classDetails.spellcasting["info"]; track spell.name) {
-                    <li>
-                      <a class="clickable" (click)="spellDetails(spell)">{{ spell.name }}</a>
-                    </li>
-                  }
-                </ul>
-              </div>
-              <div>
-                @if (!selectedSpell) {
-                  Select a spell to show description
-                } @else {
-                  {{ selectedSpell.desc.join("\\n") }}
-                }
-              </div>
-            </div>
-          </div>
+        } @else {
+            <p>Please select a level</p>
         }
+
       </div>
     </div>
   `,
@@ -62,9 +64,14 @@ import {ProficiencyDetailsComponent} from '../proficiency-details/proficiency-de
 })
 export class ClassDetailsComponent {
   @Input() classIndex!: string;
+
   classDetails: any = {};
-  selectedSpell: {name: string, desc:string[]} | undefined;
+
   selectedProficiency: Proficiencies | undefined;
+  spellList: any[] | undefined;
+  // selectedSpell: Spells | undefined;
+  classLevel: number | 0 = 1;
+  doSpell: boolean = false;
 
   constructor(private api: ApiService) {}
 
@@ -72,18 +79,29 @@ export class ClassDetailsComponent {
     if(this.classIndex) {
       this.api.getClassesDetails(this.classIndex).subscribe(response => {
         this.classDetails = response;
-        this.selectedSpell = undefined;
-        this.selectedProficiency = undefined;
+
+        if(this.classDetails.spells) {
+          this.doSpell = true;
+          this.api.get<any>(this.classDetails.spells).subscribe(response => {
+            this.spellList = response.results;
+          });
+        } else {
+          this.doSpell = false;
+        }
       });
     }
   }
 
-  spellDetails(spellInfo: {name: string, desc:string[]}): void {
-    this.selectedSpell = spellInfo;
+  selectLevel(level: number) {
+    this.classLevel = level;
   }
 
-  proficiencyDetails(proficiency: Proficiencies): void {
-    this.selectedProficiency = proficiency;
+  getSpellsByLevels(level: number): any[] {
+    if(level < 1) return [];
+    if(!this.spellList) return [];
+    return this.spellList.filter(spell => spell.level === level);
   }
+
+
 
 }

@@ -1,0 +1,39 @@
+.tab-container {
+  min-width: 100%;
+  position: relative;
+}
+
+.nav {
+  position: absolute;
+  left: -19px;
+  top: 15px;
+}
+
+.nav .tab {
+  display: block;
+  padding: 7px;
+  margin: 5px;
+  border-radius: 15px 0 0 15px;
+  background-color: #ff4b4b;
+  width: 70px;
+  color: white;
+}
+
+.nav .tab.active {
+  font-style: italic;
+  border-radius: 15px;
+  width: 80px;
+}
+
+.nav .tab:hover {
+  background-color: #ff0000;
+}
+
+.template {
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.5);
+  min-height: 200px;
+  padding: 5px 5px 5px 30px;
+  margin-left: 70px;
+}
+
