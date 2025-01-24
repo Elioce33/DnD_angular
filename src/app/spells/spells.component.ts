@@ -1,49 +1,61 @@
 import { Component } from '@angular/core';
-import {ApiObjectReference} from '../api.interfaces';
+import {ApiListReference, ApiObjectReference, Pagination} from '../api.interfaces';
 import {ApiService} from '../api.service';
 import {Spell} from './spells.interface';
-import {Observable} from 'rxjs';
+import {Observable, zip, zipWith} from 'rxjs';
 import {SpellsArrayComponent} from './spells-array/spells-array.component';
+import {SpellDetailsComponent} from './spell-details/spell-details.component';
 
 @Component({
   selector: 'app-spells',
   imports: [
-    SpellsArrayComponent
+    SpellsArrayComponent,
+    SpellDetailsComponent
   ],
   template: `
     <div class="container">
       <h1>Spells</h1>
       <p>All you need to know about spells</p>
-      <div class="spells">
-        <div class="array">
-          <app-spells-array [spells]="spells" (selectedSpell)="selectASpell($event)" />
+      @if (spells.length > 0) {
+        <div class="spells">
+          <div class="array">
+            <app-spells-array
+              [spells]="spells"
+              [spellCount]="spellCount"
+              [pageSize]="pageSize"
+              (selectedSpell)="selectASpell($event)"
+              (selectedPage)="displayPage($event)" />
+          </div>
         </div>
-        <div class="details">
-          @if (selectedSpell) {
-            <h2>{{selectedSpell.name}}</h2>
-          } @else {
-           <p>No spell selected, click on a row to display details</p>
-          }
-        </div>
-      </div>
+      } @else {
+        <i>loading</i>
+      }
     </div>
   `,
   styleUrl: './spells.component.css'
 })
 export class SpellsComponent {
+  spellsReferences: ApiObjectReference[] = [];
+  spellCount: number = 0;
   spells: Spell[] = []
   selectedSpell: Spell | undefined = undefined;
+  pageSize: number = 20;
 
   constructor(private api: ApiService) {
-    this.api.getSpells().subscribe((response: ApiObjectReference[]): void => {
-      this.api.getAllReferences<Spell>(response).forEach( (observableSpell: Observable<Spell>): void => {
-        observableSpell.subscribe( (spell: Spell): void => { this.spells.push(spell); })
-      });
+    this.api.getSpells().subscribe((response: ApiListReference): void => {
+      this.spellsReferences = response.results;
+      this.spellCount = response.count;
+      this.displayPage({offset: 0, limit: this.pageSize});
     });
+  }
+
+  displayPage(pagination: Pagination): void {
+    zip(this.api.getAllReferences<Spell>(this.spellsReferences, pagination)).subscribe(response => {
+      this.spells = response
+    })
   }
 
   selectASpell(spell: Spell): void {
     this.selectedSpell = spell;
   }
-
 }

@@ -1,5 +1,10 @@
+#spellArrayComponent {
+  padding: 30px;
+}
+
 table {
   margin: auto;
+  width: 100%;
 }
 
 tr:has(th) {
@@ -26,3 +31,28 @@ tr:nth-child(even) {
 tr:has(td):hover {
   background-color: rgba(200, 100, 100, 0.5);
 }
+
+.paginationSelector {
+  padding-top: 15px;
+  text-align: center;
+}
+
+.pageButton {
+  margin: 0 4px;
+  background-color: #a98c66;
+  font-size: x-small;
+  height: 25px;
+  width: 25px;
+  border-radius: 25px;
+  border: none;
+  box-shadow: #725f46 2px 2px 3px;
+  cursor: pointer;
+  color: white;
+}
+
+.pageButton:hover,
+.pageButton.selectedPage {
+  background-color: #80694d;
+  box-shadow: none;
+}
+
