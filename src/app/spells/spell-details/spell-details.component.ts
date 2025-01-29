@@ -1,15 +1,20 @@
 import {Component, Input} from '@angular/core';
 import {Spell} from '../spells.interface';
+import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-spell-details',
-  imports: [],
+  imports: [
+    NgForOf
+  ],
   template: `
     <div id="spellDetailsComponent">
       @if (spell) {
         <h2>{{spell.name}}</h2>
         <div class="description">
-          {{ spell.desc.join("\\n") }}
+          @for (desc of spell.desc; track desc) {
+            <p>{{desc}}</p>
+          }
         </div>
         <div class="stats">
           <h3>Statistics</h3>

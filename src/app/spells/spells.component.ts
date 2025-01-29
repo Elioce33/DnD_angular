@@ -57,7 +57,7 @@ export class SpellsComponent {
   }
 
   displayPage(pagination: Pagination): void {
-    zip(this.api.getAllReferences<Spell>(this.spellsReferences, pagination)).subscribe(response => {
+    this.api.getAllReferences<Spell>(this.spellsReferences, pagination).subscribe((response: Spell[]) => {
       this.spells = response
     })
   }

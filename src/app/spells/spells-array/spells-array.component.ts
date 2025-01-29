@@ -19,8 +19,6 @@ import {NgClass, NgForOf} from '@angular/common';
             <th>Name</th>
             <th>School</th>
             <th>Level</th>
-<!--            <th>Casting time</th>-->
-<!--            <th>Duration</th>-->
             <th>Need concentration</th>
           </tr>
           <tbody>
@@ -29,8 +27,6 @@ import {NgClass, NgForOf} from '@angular/common';
                 <td>{{ spell.name }}</td>
                 <td>{{ spell.school.name }}</td>
                 <td>{{ spell.level }}</td>
-<!--                <td>{{ spell.casting_time }}</td>-->
-<!--                <td>{{ spell.duration }}</td>-->
                 <td>{{ spell.concentration ? 'yes' : 'no' }}</td>
               </tr>
             }

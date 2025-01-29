@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {map, Observable} from "rxjs";
+import {map, Observable, zip} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from "./app.tokens";
 import {DndClassRequest} from './classes/classes.interface';
@@ -19,17 +19,12 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}${path}`) as Observable<T>;
   }
 
-  getAllReferences<T>(references: ApiObjectReference[], page?: Pagination): Observable<T>[] {
+  getAllReferences<T>(references: ApiObjectReference[], page?: Pagination): Observable<T[]> {
     const observables: Observable<T>[] = [];
     if(page) {
       references = references.slice(page.offset, page.offset + page.limit);
     }
-    references.forEach(reference => {
-      observables.push(
-        this.http.get<T>(`${this.baseUrl}${reference.url}`)
-      );
-    });
-    return observables;
+    return zip<T[]>(references.map( (reference: ApiObjectReference): Observable<T> => this.get<T>(reference.url) ));
   }
 
   getClasses(): Observable<DndClassRequest> {
