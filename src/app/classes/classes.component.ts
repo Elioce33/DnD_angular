@@ -8,36 +8,7 @@ import {ClassDetailsComponent} from "./classes-details/class-details.component";
   imports: [
     ClassDetailsComponent
   ],
-  template: `
-    <h1>List of classes</h1>
-    @if (!this.classCount) {
-      <i>loading</i>
-    } @else {
-      <p>Total class count : {{classCount}}</p>
-      <p>Selected class : {{selectedClass}}</p>
-
-      <div class="container">
-        <div class="list">
-          <p>Class list : </p>
-          <ul>
-            @for (dndClass of this.classes; track dndClass.index) {
-              <li class="{{selectedClass === dndClass.index ? 'selected' : ''}}">
-                <div class="classListItem">
-                  {{ dndClass.name }}
-                </div>
-                <button (click)="displayClass(dndClass.index)">show</button>
-              </li>
-            }
-          </ul>
-        </div>
-        <div class="details">
-          @if (this.selectedClass) {
-              <app-class-details [classIndex]="this.selectedClass" />
-          }
-        </div>
-      </div>
-    }
-  `,
+  templateUrl: `./classes.component.html`,
   styleUrl: `./classes.component.css`
 })
 export class ClassesComponent {

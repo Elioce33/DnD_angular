@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Spells</h1>
+    <p>All you need to know about spells</p>
+    @if (spells.length > 0) {
+        <div class="spells">
+        <div class="array">
+            <app-spells-array
+            [spells]="spells"
+            [spellCount]="spellCount"
+            [pageSize]="pageSize"
+            (selectedSpell)="selectASpell($event)"
+            (selectedPage)="displayPage($event)" />
+        </div>
+        <div class="details">
+            @if (selectedSpell) {
+            <app-spell-details [spell]="selectedSpell" />
+            } @else {
+            <p>No spell selected, click on a row to display details</p>
+            }
+        </div>
+        </div>
+    } @else {
+        <i>loading</i>
+    }
+</div>

@@ -12,33 +12,7 @@ import {SpellDetailsComponent} from './spell-details/spell-details.component';
     SpellsArrayComponent,
     SpellDetailsComponent
   ],
-  template: `
-    <div class="container">
-      <h1>Spells</h1>
-      <p>All you need to know about spells</p>
-      @if (spells.length > 0) {
-        <div class="spells">
-          <div class="array">
-            <app-spells-array
-              [spells]="spells"
-              [spellCount]="spellCount"
-              [pageSize]="pageSize"
-              (selectedSpell)="selectASpell($event)"
-              (selectedPage)="displayPage($event)" />
-          </div>
-          <div class="details">
-            @if (selectedSpell) {
-              <app-spell-details [spell]="selectedSpell" />
-            } @else {
-             <p>No spell selected, click on a row to display details</p>
-            }
-          </div>
-        </div>
-      } @else {
-        <i>loading</i>
-      }
-    </div>
-  `,
+  templateUrl: './spells.component.html',
   styleUrl: './spells.component.css'
 })
 export class SpellsComponent {
@@ -57,7 +31,7 @@ export class SpellsComponent {
   }
 
   displayPage(pagination: Pagination): void {
-    zip(this.api.getAllReferences<Spell>(this.spellsReferences, pagination)).subscribe(response => {
+    this.api.getAllReferences<Spell>(this.spellsReferences, pagination).subscribe((response: Spell[]) => {
       this.spells = response
     })
   }

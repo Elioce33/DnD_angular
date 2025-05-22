@@ -5,14 +5,7 @@ import {Proficiencies, Spellcasting} from './class-details.interface';
 @Component({
   selector: 'app-class-details',
   imports: [],
-  template: `
-    <div class="classDetails">
-      <h2>{{ classDetails.name }}</h2>
-      <div class="info">
-        <i>information here</i>
-      </div>
-    </div>
-  `,
+  templateUrl: './class-details.component.html',
   styleUrl: './class-details.component.css'
 })
 export class ClassDetailsComponent {
