@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from "./app.tokens";
 import {DndClassRequest} from './classes/classes.interface';
 import {ClassDetailsInterface} from "./classes/classes-details/class-details.interface";
-import {ApiListReference, ApiObjectReference} from './api.interfaces';
+import {ApiListReference, ApiObjectReference, Pagination} from './api.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,11 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}${path}`) as Observable<T>;
   }
 
-  getAllReferences<T>(references: ApiObjectReference[]): Observable<T>[] {
+  getAllReferences<T>(references: ApiObjectReference[], page?: Pagination): Observable<T>[] {
     const observables: Observable<T>[] = [];
+    if(page) {
+      references = references.slice(page.offset, page.offset + page.limit);
+    }
     references.forEach(reference => {
       observables.push(
         this.http.get<T>(`${this.baseUrl}${reference.url}`)
@@ -37,9 +40,8 @@ export class ApiService {
     return this.get<ClassDetailsInterface>(`/api/classes/${index}`);
   }
 
-  getSpells(): Observable<ApiObjectReference[]> {
-    return this.get<ApiListReference>('/api/spells')
-      .pipe( map( (response: ApiListReference) =>  response.results) );
+  getSpells(): Observable<ApiListReference> {
+    return this.get<ApiListReference>('/api/spells');
   }
 
   getProficienciesDetails(index: string): Observable<ClassDetailsInterface> {

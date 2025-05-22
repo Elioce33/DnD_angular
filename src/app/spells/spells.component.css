@@ -1,17 +1,13 @@
 .container {
-  border: 1px solid white;
   margin: 10px;
   padding: 10px;
 }
 
 .spells {
-  border: 1px solid white;
-
   position: relative;
-  width: 98%;
   margin: auto;
   display: flex;
-  padding: 20px;
+  gap: 20px;
 }
 
 .array, .details {
@@ -20,11 +16,20 @@
   display: inline-block;
   width: 50%;
   margin: 5px;
-  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 5px;
 }
 
 .array {
 }
 
 .details {
+  position: relative;
+}
+
+.details p {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
