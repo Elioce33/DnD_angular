@@ -1,0 +1,48 @@
+.container {
+  width: 90%;
+  padding-left: 3%;
+  padding-right: 3%;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 20px;
+}
+
+.container .list {
+  grid-column: 1 / 3;
+  /*border: 1px solid green;*/
+
+  border: 2px solid darkorange;
+  border-radius: 25px;
+  background-color: #d3c1a9;
+}
+
+.container .details {
+  grid-column: 3 / -1;
+  /*border: 1px solid red;*/
+}
+
+.classListItem {
+  width: 100px;
+  display: inline-block;
+}
+
+.list button {
+  width: 50px;
+}
+
+.list ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list ul li {
+  width: 150px;
+  margin: auto;
+}
+
+.list ul .selected {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding-left: 20px;
+}
+
