@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {ApiService} from "../api.service";
 import { DndClassRequestResults } from './classes.interface';
-import {ClassDetailsComponent} from "../classes-details/class-details.component";
+import {ClassDetailsComponent} from "./classes-details/class-details.component";
 
 @Component({
   selector: 'app-classes',
@@ -9,6 +9,7 @@ import {ClassDetailsComponent} from "../classes-details/class-details.component"
     ClassDetailsComponent
   ],
   template: `
+    <h1>List of classes</h1>
     @if (!this.classCount) {
       <i>loading</i>
     } @else {

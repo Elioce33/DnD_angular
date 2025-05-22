@@ -1,6 +1,6 @@
-import {apiObjectReference} from '../api.interfaces';
+import {ApiObjectReference} from '../../api.interfaces';
 
-export interface ClassDetailsInterface extends apiObjectReference {
+export interface ClassDetailsInterface extends ApiObjectReference {
   hit_die: number;
   spells: string,
   class_levels : string,
@@ -11,7 +11,7 @@ export interface ClassDetailsInterface extends apiObjectReference {
   starting_equipment: StartingEquipment[]
   starting_equipment_options: StartingEquipmentOptions[]
   multi_classing: MultiClassing
-  subclasses: apiObjectReference[],
+  subclasses: ApiObjectReference[],
   spellcasting: Spellcasting
 }
 
@@ -29,15 +29,15 @@ interface ProficiencyChoicesFrom {
 
 interface ProficiencyChoicesFromOption {
   option_type: string,
-  item: apiObjectReference
+  item: ApiObjectReference
 }
 
-export interface Proficiencies extends apiObjectReference {}
+export interface Proficiencies extends ApiObjectReference {}
 
-interface SavingThrows extends apiObjectReference {}
+interface SavingThrows extends ApiObjectReference {}
 
 interface StartingEquipment {
-  equipment: apiObjectReference,
+  equipment: ApiObjectReference,
   quantity: number
 }
 
@@ -55,14 +55,14 @@ interface StartingEquipmentOptionsFrom {
 
 interface StartingEquipmentOptionsFromEquipmentCategory {
   option_set_type: "equipment_category",
-  equipment_category: apiObjectReference,
+  equipment_category: ApiObjectReference,
 }
 
 interface StartingEquipmentOptionsFromOption {
   option_type: "counted_reference",
   count: number,
-  of: apiObjectReference
-  prerequisites?: { type: string, proficiency: apiObjectReference }[]
+  of: ApiObjectReference
+  prerequisites?: { type: string, proficiency: ApiObjectReference }[]
 }
 
 interface StartingEquipmentOptionsFromOptionMultiple {
@@ -78,22 +78,22 @@ interface StartingEquipmentOptionsFromOptionChoice {
     type: string,
     from: {
       option_set_type: string,
-      equipment_category: apiObjectReference
+      equipment_category: ApiObjectReference
     }
   }
 }
 
 interface MultiClassing {
   prerequisites: {
-    ability_score: apiObjectReference,
+    ability_score: ApiObjectReference,
     minimum_score: number
   }[],
-  proficiencies: apiObjectReference[]
+  proficiencies: ApiObjectReference[]
 }
 
 export interface Spellcasting {
   level: number,
-  spellcasting_ability: apiObjectReference,
+  spellcasting_ability: ApiObjectReference,
   info: {
     name: string,
     desc: string[]

@@ -1,0 +1,28 @@
+.container {
+  width: 80%;
+  margin: 5% auto auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 100px;
+
+}
+
+.card {
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 25px;
+  padding: 10px;
+  max-width: 300px;
+  aspect-ratio: 1;
+}
+
+.card:hover {
+  background-color: rgba(255, 248, 195, 0.8);
+  box-shadow: #ffea73 0 0 5px;
+  cursor: pointer;
+}
+
+
