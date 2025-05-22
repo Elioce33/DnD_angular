@@ -1,0 +1,25 @@
+#spellDetailsComponent {
+
+}
+
+h2 {
+  text-align: center;
+}
+
+.description {
+  width: 70%;
+  margin: auto;
+}
+
+.stats {
+  margin: 0 10%;
+}
+
+.stats h3 {
+  margin-bottom: 0;
+}
+
+.stats .container {
+  display: flex;
+}
+

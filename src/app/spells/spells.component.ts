@@ -26,6 +26,13 @@ import {SpellDetailsComponent} from './spell-details/spell-details.component';
               (selectedSpell)="selectASpell($event)"
               (selectedPage)="displayPage($event)" />
           </div>
+          <div class="details">
+            @if (selectedSpell) {
+              <app-spell-details [spell]="selectedSpell" />
+            } @else {
+             <p>No spell selected, click on a row to display details</p>
+            }
+          </div>
         </div>
       } @else {
         <i>loading</i>
