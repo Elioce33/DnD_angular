@@ -13,7 +13,7 @@ import {SpellDetailsComponent} from './spell-details/spell-details.component';
     SpellDetailsComponent
   ],
   templateUrl: './spells.component.html',
-  styleUrl: './spells.component.css'
+  styleUrl: './spells.component.scss'
 })
 export class SpellsComponent {
   spellsReferences: ApiObjectReference[] = [];

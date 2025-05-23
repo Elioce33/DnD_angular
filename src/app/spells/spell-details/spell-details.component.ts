@@ -5,7 +5,7 @@ import {Spell} from '../spells.interface';
   selector: 'app-spell-details',
   imports: [],
   templateUrl: './spell-details.component.html',
-  styleUrl: './spell-details.component.css'
+  styleUrl: './spell-details.component.scss'
 })
 export class SpellDetailsComponent {
   @Input() spell: Spell | undefined = undefined;

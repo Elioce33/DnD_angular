@@ -9,7 +9,7 @@ import {ClassDetailsComponent} from "./classes-details/class-details.component";
     ClassDetailsComponent
   ],
   templateUrl: `./classes.component.html`,
-  styleUrl: `./classes.component.css`
+  styleUrl: `./classes.component.scss`
 })
 export class ClassesComponent {
   classes: DndClassRequestResults[] | undefined;

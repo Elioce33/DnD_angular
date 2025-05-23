@@ -6,7 +6,7 @@ import {Proficiencies, Spellcasting} from './class-details.interface';
   selector: 'app-class-details',
   imports: [],
   templateUrl: './class-details.component.html',
-  styleUrl: './class-details.component.css'
+  styleUrl: './class-details.component.scss'
 })
 export class ClassDetailsComponent {
   @Input() classIndex!: string;

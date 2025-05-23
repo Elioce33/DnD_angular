@@ -42,7 +42,7 @@ import {RouterLink, RouterLinkActive, RouterModule, RouterOutlet} from '@angular
       </div>
     </footer>
     `,
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'D&D api reader';

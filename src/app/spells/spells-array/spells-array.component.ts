@@ -10,7 +10,7 @@ import {NgClass, NgForOf} from '@angular/common';
     NgClass
   ],
   templateUrl: './spells-array.component.html',
-  styleUrl: './spells-array.component.css'
+  styleUrl: './spells-array.component.scss'
 })
 export class SpellsArrayComponent {
   protected readonly Math = Math;
