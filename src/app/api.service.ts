@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {map, Observable, zip} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from "./app.tokens";
-import {DndClassRequest} from './classes/classes.interface';
+import {DndClassRequestResults} from './classes/classes.interface';
 import {ClassDetailsInterface} from "./classes/classes-details/class-details.interface";
 import {ApiListReference, ApiObjectReference, Pagination} from './api.interfaces';
 import {Spell} from './spells/spells.interface';
@@ -28,8 +28,8 @@ export class ApiService {
     return zip<T[]>(references.map( (reference: ApiObjectReference): Observable<T> => this.get<T>(reference.url) ));
   }
 
-  getClasses(): Observable<DndClassRequest> {
-    return this.get<DndClassRequest>('/api/classes');
+  getClasses(): Observable<ApiListReference<DndClassRequestResults>> {
+    return this.get<ApiListReference<DndClassRequestResults>>('/api/classes');
   }
 
   getClassesDetails(index: string): Observable<ClassDetailsInterface> {

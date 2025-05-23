@@ -4,7 +4,7 @@ export interface DndClassRequestResults {
   url: string
 }
 
-export interface DndClassRequest {
-  count: number,
-  results: DndClassRequestResults[]
-}
+// export interface DndClassRequest {
+//   count: number,
+//   results: DndClassRequestResults[]
+// }
