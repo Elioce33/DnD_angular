@@ -5,9 +5,9 @@ import { routes } from './app.routes';
 import {BASE_URL} from "./app.tokens";
 import {provideHttpClient} from "@angular/common/http";
 import { provideState, provideStore } from '@ngrx/store';
-import { spellFeature } from '../store/spells/spells.reducer';
+import { spellFeature } from '../store/store.reducer';
 import {provideEffects} from '@ngrx/effects';
-import {spellsGetAll$} from '../store/spells/spells.effect';
+import {spellsGetAll$} from '../store/store.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [

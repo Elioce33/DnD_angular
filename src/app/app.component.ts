@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterModule, RouterOutlet} from '@angular/router';
 import { Store } from '@ngrx/store';
-import { loadSpells } from '../store/spells/spells.actions';
+import { spellsActions } from '../store/store.actions';
 
 @Component({
   selector: 'app-root',
@@ -52,6 +52,6 @@ export class AppComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(loadSpells());
+    this.store.dispatch(spellsActions.loadSpells());
   }
 }

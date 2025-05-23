@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {Pagination} from '../api.interfaces';
+import {Pagination} from '../../models/api.interfaces';
 import {ApiService} from '../api.service';
-import {Spell} from './spells.interface';
+import {Spell} from '../../models/spells.interface';
 import {Observable} from 'rxjs';
 import {SpellsArrayComponent} from './spells-array/spells-array.component';
 import {SpellDetailsComponent} from './spell-details/spell-details.component';
 import { Store } from '@ngrx/store';
-import { selectSpellList } from '../../store/spells/spells.selectors';
+import { selectSpellList } from '../../store/store.selectors';
 
 @Component({
   selector: 'app-spells',

@@ -1,6 +1,6 @@
 import {Component, Input, input} from '@angular/core';
 import {ApiService} from '../../api.service';
-import {Proficiencies, Spellcasting} from './class-details.interface';
+import {Proficiencies} from '../../../models/class-details.interface';
 
 @Component({
   selector: 'app-class-details',

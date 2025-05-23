@@ -1,31 +1,31 @@
 import { createFeature, createReducer, createSelector, on } from "@ngrx/store";
 
-import { Spell } from "../../app/spells/spells.interface";
-import { loadSpells, loadSpellsEchec, loadSpellsSuccess } from "./spells.actions";
+import { Spell } from "../models/spells.interface";
+import { spellsActions } from "./store.actions";
 
-export interface SpellsState {
+export interface ModelState {
     spellList: Spell[];
     loading: boolean;
 }
 
 
-const initialState: SpellsState = {
+const initialState: ModelState = {
     spellList: [],
     loading: true
 }
 
-export const spellsReducer = createReducer(
+export const storeReducer = createReducer(
     initialState,
-    on(loadSpells, state => ({
+    on(spellsActions.loadSpells, state => ({
         ...state,
         loading: true
     })),
-    on(loadSpellsSuccess, (state, { spells }) => ({
+    on(spellsActions.loadSpellsSuccess, (state, { spells }) => ({
         ...state,
         spellList: spells,
         loading: false
     })),
-    on(loadSpellsEchec, state => ({
+    on(spellsActions.loadSpellsFaillure, state => ({
         ...state,
         loading: false
     }))
@@ -33,5 +33,5 @@ export const spellsReducer = createReducer(
 
 export const spellFeature = createFeature({
     name: 'spells',
-    reducer: spellsReducer
+    reducer: storeReducer
 })

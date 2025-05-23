@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, Input, Output, SimpleChanges} from '@angular/core';
-import {Spell} from '../spells.interface';
-import {Pagination} from '../../api.interfaces';
+import {Spell} from '../../../models/spells.interface';
+import {Pagination} from '../../../models/api.interfaces';
 import {NgClass, NgForOf} from '@angular/common';
 
 @Component({

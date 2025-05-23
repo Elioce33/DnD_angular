@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Spell} from '../spells.interface';
+import {Spell} from '../../../models/spells.interface';
 
 @Component({
   selector: 'app-spell-details',

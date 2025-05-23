@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ApiService} from "../api.service";
-import { DndClassRequestResults } from './classes.interface';
+import { DndClassRequestResults } from '../../models/classes.interface';
 import {ClassDetailsComponent} from "./classes-details/class-details.component";
 
 @Component({

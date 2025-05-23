@@ -1,4 +1,4 @@
-import {ApiObjectReference} from '../../api.interfaces';
+import {ApiObjectReference} from './api.interfaces';
 
 export interface ClassDetailsInterface extends ApiObjectReference {
   hit_die: number;
