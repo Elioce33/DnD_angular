@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
-import {ApiListReference, ApiObjectReference, Pagination} from '../api.interfaces';
+import {Component} from '@angular/core';
+import {Pagination} from '../api.interfaces';
 import {ApiService} from '../api.service';
 import {Spell} from './spells.interface';
-import {Observable, zip, zipWith} from 'rxjs';
+import {Observable} from 'rxjs';
 import {SpellsArrayComponent} from './spells-array/spells-array.component';
 import {SpellDetailsComponent} from './spell-details/spell-details.component';
+import { Store } from '@ngrx/store';
+import { selectSpellList } from '../../store/spells/spells.selectors';
 
 @Component({
   selector: 'app-spells',
@@ -16,16 +18,21 @@ import {SpellDetailsComponent} from './spell-details/spell-details.component';
   styleUrl: './spells.component.scss'
 })
 export class SpellsComponent {
-  spellsReferences: ApiObjectReference[] = [];
+  spellsList$: Observable<Spell[]> = new Observable<Spell[]>();
+
+  spellsReferences: Spell[] = [];
   spellCount: number = 0;
   spells: Spell[] = []
   selectedSpell: Spell | undefined = undefined;
   pageSize: number = 20;
 
-  constructor(private api: ApiService) {
-    this.api.getSpells().subscribe((response: ApiListReference): void => {
-      this.spellsReferences = response.results;
-      this.spellCount = response.count;
+  constructor(private api: ApiService, private store: Store) {
+    this.spellsList$ = this.store.select(selectSpellList);
+
+    this.spellsList$.subscribe((spells: Spell[]) => {
+      console.log("spells", spells);
+      this.spellsReferences = spells;
+      this.spellCount = spells.length;
       this.displayPage({offset: 0, limit: this.pageSize});
     });
   }

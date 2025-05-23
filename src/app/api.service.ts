@@ -5,6 +5,7 @@ import {BASE_URL} from "./app.tokens";
 import {DndClassRequest} from './classes/classes.interface';
 import {ClassDetailsInterface} from "./classes/classes-details/class-details.interface";
 import {ApiListReference, ApiObjectReference, Pagination} from './api.interfaces';
+import {Spell} from './spells/spells.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +36,8 @@ export class ApiService {
     return this.get<ClassDetailsInterface>(`/api/classes/${index}`);
   }
 
-  getSpells(): Observable<ApiListReference> {
-    return this.get<ApiListReference>('/api/spells');
+  getSpells(): Observable<ApiListReference<Spell>> {
+    return this.get<ApiListReference<Spell>>('/api/spells');
   }
 
   getProficienciesDetails(index: string): Observable<ClassDetailsInterface> {

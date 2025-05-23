@@ -4,9 +4,9 @@ export interface ApiObjectReference {
   url: string,
 }
 
-export interface ApiListReference {
+export interface ApiListReference<T> {
   count: number,
-  results: ApiObjectReference[]
+  results: T[]
 }
 
 export interface Pagination {

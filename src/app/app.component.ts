@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterModule, RouterOutlet} from '@angular/router';
+import { Store } from '@ngrx/store';
+import { loadSpells } from '../store/spells/spells.actions';
 
 @Component({
   selector: 'app-root',
@@ -44,6 +46,12 @@ import {RouterLink, RouterLinkActive, RouterModule, RouterOutlet} from '@angular
     `,
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'D&D api reader';
+
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(loadSpells());
+  }
 }
