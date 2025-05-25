@@ -20,6 +20,12 @@ export const storeReducer = createReducer(
         ...state,
         loading: true
     })),
+    on(spellsActions.loadSpellsFromReferences, (state, pagination) => {
+      return {
+        ...state,
+        loading: true
+      };
+    }),
     on(spellsActions.loadSpellsSuccess, (state, { spells }) => ({
         ...state,
         spellList: spells,

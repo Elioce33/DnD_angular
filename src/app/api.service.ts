@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {map, Observable, zip} from "rxjs";
+import {map, Observable, of, zip} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from "./app.tokens";
 import {ClassDetailsInterface} from "../models/class-details.interface";
@@ -28,11 +28,15 @@ export class ApiService {
    * @param page get only the selected page to
    */
   getAllReferences<T>(references: ApiObjectReference[], page?: Pagination): Observable<T[]> {
-    const observables: Observable<T>[] = [];
     if(page) {
       references = references.slice(page.offset, page.offset + page.limit);
     }
-    return zip<T[]>(references.map( (reference: ApiObjectReference): Observable<T> => this.get<T>(reference.url) ));
+
+    return zip<T[]>(references.map( (reference: ApiObjectReference): Observable<T> => {
+      if((reference as any)['updated_at']) return of(reference as T);
+
+      return this.get<T>(reference.url)
+    } ));
   }
 
   /**

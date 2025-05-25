@@ -4,10 +4,11 @@
     @if (spells.length > 0) {
         <div class="spells">
           <div class="array">
-              <app-spells-array
+            <app-spells-array
+              [isLoading]="isLoading"
               [spells]="spells"
               [spellCount]="spellCount"
-              [pageSize]="pageSize"
+              [pageSize]="PAGE_SIZE"
               (selectedSpell)="selectASpell($event)"
               (selectedPage)="displayPage($event)" />
           </div>

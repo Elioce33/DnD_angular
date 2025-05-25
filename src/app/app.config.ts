@@ -7,7 +7,7 @@ import {provideHttpClient} from "@angular/common/http";
 import { provideState, provideStore } from '@ngrx/store';
 import { spellFeature } from '../store/store.reducer';
 import {provideEffects} from '@ngrx/effects';
-import {spellsGetAll$} from '../store/store.effect';
+import {spellsGetAll$, updateSpellFromReferences$} from '../store/store.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +18,8 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideState(spellFeature),
     provideEffects({
-      spellsGetAll$
+      spellsGetAll$,
+      updateSpellFromReferences$
     })
   ]
 };

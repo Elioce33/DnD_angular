@@ -16,6 +16,7 @@ export class SpellsArrayComponent {
   protected readonly Math = Math;
 
   currentPage: number = 0;
+  @Input() isLoading: boolean = false;
   @Input() spells: Spell[] = [];
   @Input() spellCount: number = 0;
   @Input() pageSize: number = 0;
