@@ -1,6 +1,6 @@
 import {createActionGroup, emptyProps, props} from "@ngrx/store";
-import { Spell } from "../models/spells.interface";
-import {Pagination} from '../models/api.interfaces';
+import { Spell } from "../../models/spells.interface";
+import {Pagination} from '../../models/api.interfaces';
 
 export const spellsActions = createActionGroup({
   source: 'Spell',
@@ -10,4 +10,4 @@ export const spellsActions = createActionGroup({
     'Load Spells Success': props<{spells: Spell[]}>(),
     'Load Spells Faillure': props<{error: any}>(),
   }
-})
+});

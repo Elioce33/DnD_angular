@@ -4,10 +4,14 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import {BASE_URL} from "./app.tokens";
 import {provideHttpClient} from "@angular/common/http";
-import { provideState, provideStore } from '@ngrx/store';
-import { spellFeature } from '../store/store.reducer';
 import {provideEffects} from '@ngrx/effects';
-import {spellsGetAll$, updateSpellFromReferences$} from '../store/store.effect';
+import { provideState, provideStore } from '@ngrx/store';
+
+import { spellReducer } from '../store/spells/spells.reducer';
+import { spellsGetAll$, updateSpellFromReferences$} from '../store/spells/spells.effect';
+
+import {classReducer} from '../store/classes/classes.reducer';
+import {classesGetAll$} from '../store/classes/classes.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,10 +20,18 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore(),
-    provideState(spellFeature),
+
+    // Provide reducers
+    provideState({ name: 'spells', reducer: spellReducer }),
+    provideState({ name: 'classes', reducer: classReducer }),
+
+    // Provide effects
     provideEffects({
+      // Spell effects
       spellsGetAll$,
-      updateSpellFromReferences$
+      updateSpellFromReferences$,
+      // Class effects
+      classesGetAll$
     })
   ]
 };

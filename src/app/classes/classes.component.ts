@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import {ApiService} from "../api.service";
 import { DndClassRequestResults } from '../../models/classes.interface';
 import {ClassDetailsComponent} from "./classes-details/class-details.component";
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectClassList } from '../../store/classes/classes.selectors';
+import { ClassDetailsInterface } from '../../models/class-details.interface';
 
 @Component({
   selector: 'app-classes',
@@ -12,16 +16,18 @@ import {ClassDetailsComponent} from "./classes-details/class-details.component";
   styleUrl: `./classes.component.scss`
 })
 export class ClassesComponent {
+  classList$: Observable<ClassDetailsInterface[]> = new Observable<ClassDetailsInterface[]>();
+
   classes: DndClassRequestResults[] | undefined;
   classCount: number | undefined;
   selectedClass: string | undefined;
 
-  constructor(private api: ApiService) {}
+  constructor(private store: Store) {
+    this.classList$ = this.store.select(selectClassList);
 
-  getClasses():void {
-    this.api.getClasses().subscribe(response => {
-      this.classes = response.results;
-      this.classCount = response.count;
+    this.classList$.subscribe( (classes: ClassDetailsInterface[]) => {
+      this.classes = classes;
+      this.classCount = classes.length;
     });
   }
 
@@ -29,10 +35,5 @@ export class ClassesComponent {
     this.selectedClass = selected;
     console.log("New class selected", this.selectedClass);
   }
-
-  ngOnInit() {
-    this.getClasses();
-  }
-
 }
 

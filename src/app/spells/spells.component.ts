@@ -6,8 +6,8 @@ import {Observable} from 'rxjs';
 import {SpellsArrayComponent} from './spells-array/spells-array.component';
 import {SpellDetailsComponent} from './spell-details/spell-details.component';
 import { Store } from '@ngrx/store';
-import { selectSpellList } from '../../store/store.selectors';
-import {spellsActions} from '../../store/store.actions';
+import { selectSpellList } from '../../store/spells/spells.selectors';
+import {spellsActions} from '../../store/spells/spells.actions';
 
 @Component({
   selector: 'app-spells',

@@ -1,14 +1,16 @@
 import {inject} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {combineLatest, map, of, switchMap, withLatestFrom} from 'rxjs';
-import {ApiService} from '../app/api.service';
-import {spellsActions} from './store.actions';
-import {ApiListReference} from '../models/api.interfaces';
-import {Spell} from '../models/spells.interface';
+import {ApiService} from '../../app/api.service';
+import {ApiListReference} from '../../models/api.interfaces';
+import {Spell} from '../../models/spells.interface';
 import {Store} from '@ngrx/store';
-import {selectSpellList} from './store.selectors';
+import {selectSpellList} from './spells.selectors';
+import {spellsActions} from './spells.actions';
 
 
+
+// ------- Spell Effect -------
 export const spellsGetAll$ = createEffect(
   (action$ = inject(Actions), api = inject(ApiService)) => {
     return action$.pipe(
