@@ -1,6 +1,8 @@
-<div class="classDetails">
-    <h2>{{ classDetails.name }}</h2>
-    <div class="info">
-        <i>information here</i>
+@if (classDetails) {
+    <div class="classDetails" [style.background-color]="detailColor+'4C'" [style.border-color]="detailColor">
+        <h3>{{ classDetails.name }}</h3>
+        <div class="info">
+            <i>information here</i>
+        </div>
     </div>
-</div>
+}
