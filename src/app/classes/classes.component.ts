@@ -5,7 +5,8 @@ import {ClassDetailsComponent} from "./classes-details/class-details.component";
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectClassList } from '../../store/classes/classes.selectors';
-import { ClassDetailsInterface } from '../../models/class-details.interface';
+import { IClass } from '../../models/IClass';
+import {ApiObjectReference} from '../../models/api.interfaces';
 
 @Component({
   selector: 'app-classes',
@@ -16,16 +17,16 @@ import { ClassDetailsInterface } from '../../models/class-details.interface';
   styleUrl: `./classes.component.scss`
 })
 export class ClassesComponent {
-  classList$: Observable<ClassDetailsInterface[]> = new Observable<ClassDetailsInterface[]>();
+  classList$: Observable<IClass[]> = new Observable<IClass[]>();
 
-  classes: DndClassRequestResults[] | undefined;
+  classes: ApiObjectReference[] | undefined;
   classCount: number | undefined;
   selectedClass: string | undefined;
 
   constructor(private store: Store) {
     this.classList$ = this.store.select(selectClassList);
 
-    this.classList$.subscribe( (classes: ClassDetailsInterface[]) => {
+    this.classList$.subscribe( (classes: IClass[]) => {
       this.classes = classes;
       this.classCount = classes.length;
     });

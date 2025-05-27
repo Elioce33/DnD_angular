@@ -1,11 +1,11 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 
-import { Spell } from "../../models/spells.interface";
+import { ISpell } from "../../models/spells.interface";
 import { spellsActions } from "./spells.actions";
 
 
 export interface ModelState {
-    spellList: Spell[];
+    spellList: ISpell[];
     spellLoading: boolean;
 }
 

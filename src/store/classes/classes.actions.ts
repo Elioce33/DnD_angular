@@ -1,11 +1,11 @@
 import {createActionGroup, emptyProps, props} from "@ngrx/store";
-import { ClassDetailsInterface } from "../../models/class-details.interface";
+import { IClass } from "../../models/IClass";
 
 export const classesActions = createActionGroup({
   source: 'Classe',
   events: {
     'Load Classes': emptyProps(),
-    'Load Classes Success': props<{classes: ClassDetailsInterface[]}>(),
+    'Load Classes Success': props<{classes: IClass[]}>(),
     'Load Classes Faillure': props<{error: any}>(),
   }
 });

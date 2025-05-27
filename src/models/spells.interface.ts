@@ -1,6 +1,6 @@
 import {ApiObjectReference} from './api.interfaces';
 
-export interface Spell extends ApiObjectReference{
+export interface ISpell extends ApiObjectReference{
   desc: string[],
   higher_level: string[],
   range: string,

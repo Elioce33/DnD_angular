@@ -3,7 +3,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {combineLatest, map, of, switchMap, withLatestFrom} from 'rxjs';
 import {ApiService} from '../../app/api.service';
 import {ApiListReference} from '../../models/api.interfaces';
-import {Spell} from '../../models/spells.interface';
+import {ISpell} from '../../models/spells.interface';
 import {Store} from '@ngrx/store';
 import {selectSpellList} from './spells.selectors';
 import {spellsActions} from './spells.actions';
@@ -16,7 +16,7 @@ export const spellsGetAll$ = createEffect(
     return action$.pipe(
       ofType(spellsActions.loadSpells),
       switchMap( () => api.getSpells() ),
-      map( (resp: ApiListReference) => spellsActions.loadSpellsSuccess({ spells: resp.results as Spell[] }) )
+      map( (resp: ApiListReference) => spellsActions.loadSpellsSuccess({ spells: resp.results as ISpell[] }) )
     )
   }, {functional : true}
 );
@@ -30,11 +30,11 @@ export const updateSpellFromReferences$ = createEffect(
       switchMap( ([pagination, stateSpellList]) => {
         return combineLatest([
           of(stateSpellList),
-          api.getAllReferences<Spell>(stateSpellList, pagination)
+          api.getAllReferences<ISpell>(stateSpellList, pagination)
         ])
       }),
       map( ( [stateSpellList, spellList] ) => {
-        const actualSpellList: Spell[] = stateSpellList;
+        const actualSpellList: ISpell[] = stateSpellList;
         const updatedSpellList = actualSpellList.map ( (spell) => {
           const updatedSpell = spellList.find( s => s.name === spell.name );
           return updatedSpell ? updatedSpell : spell;

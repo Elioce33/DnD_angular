@@ -2,7 +2,7 @@ import {inject, Injectable} from '@angular/core';
 import {map, Observable, of, zip} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from "./app.tokens";
-import {ClassDetailsInterface} from "../models/class-details.interface";
+import {IClass} from "../models/IClass";
 import {ApiListReference, ApiObjectReference, Pagination} from '../models/api.interfaces';
 
 @Injectable({
@@ -53,11 +53,11 @@ export class ApiService {
     return this.get<ApiListReference>('/api/classes');
   }
 
-  getClassesDetails(index: string): Observable<ClassDetailsInterface> {
-    return this.get<ClassDetailsInterface>(`/api/classes/${index}`);
+  getClassesDetails(index: string): Observable<IClass> {
+    return this.get<IClass>(`/api/classes/${index}`);
   }
 
-  getProficienciesDetails(index: string): Observable<ClassDetailsInterface> {
-    return this.get<ClassDetailsInterface>(`/api/proficiencies/${index}`);
+  getProficienciesDetails(index: string): Observable<IClass> {
+    return this.get<IClass>(`/api/proficiencies/${index}`);
   }
 }

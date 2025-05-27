@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Spell} from '../../../models/spells.interface';
+import {ISpell} from '../../../models/spells.interface';
 
 @Component({
   selector: 'app-spell-details',
@@ -8,6 +8,6 @@ import {Spell} from '../../../models/spells.interface';
   styleUrl: './spell-details.component.scss'
 })
 export class SpellDetailsComponent {
-  @Input() spell: Spell | undefined = undefined;
+  @Input() spell: ISpell | undefined = undefined;
 
 }

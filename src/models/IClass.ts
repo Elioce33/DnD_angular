@@ -1,6 +1,6 @@
 import {ApiObjectReference} from './api.interfaces';
 
-export interface ClassDetailsInterface extends ApiObjectReference {
+export interface IClass extends ApiObjectReference {
   hit_die: number;
   spells: string,
   class_levels : string,

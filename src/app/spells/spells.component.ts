@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Pagination} from '../../models/api.interfaces';
 import {ApiService} from '../api.service';
-import {Spell} from '../../models/spells.interface';
+import {ISpell} from '../../models/spells.interface';
 import {Observable} from 'rxjs';
 import {SpellsArrayComponent} from './spells-array/spells-array.component';
 import {SpellDetailsComponent} from './spell-details/spell-details.component';
@@ -19,28 +19,28 @@ import {spellsActions} from '../../store/spells/spells.actions';
   styleUrl: './spells.component.scss'
 })
 export class SpellsComponent {
-  spellsList$: Observable<Spell[]> = new Observable<Spell[]>();
+  spellsList$: Observable<ISpell[]> = new Observable<ISpell[]>();
 
   protected PAGE_SIZE: number = 20;
 
-  private spellsReferences: Spell[] = []; // the list of every spell (contains full spell or just the reference)
+  private spellsReferences: ISpell[] = []; // the list of every spell (contains full spell or just the reference)
   private pagination: Pagination = {offset: 0, limit: this.PAGE_SIZE};
 
-  protected spells: Spell[] = []; // list of displayed spells, based on this.pagination
+  protected spells: ISpell[] = []; // list of displayed spells, based on this.pagination
   protected spellCount: number = 0;
-  protected selectedSpell: Spell | undefined = undefined;
+  protected selectedSpell: ISpell | undefined = undefined;
   protected isLoading = true;
 
 
   constructor(private store: Store) {
     this.spellsList$ = this.store.select(selectSpellList);
 
-    this.spellsList$.subscribe((spells: Spell[]) => {
+    this.spellsList$.subscribe((spells: ISpell[]) => {
       this.spellsReferences = spells;
       this.spellCount = spells.length;
 
       const slicedSpellReferences = this.spellsReferences.slice(this.pagination.offset, this.pagination.offset + this.pagination.limit);
-      const everySpellLoaded = slicedSpellReferences.reduce( (accumulator: boolean, currentValue: Spell) => !!currentValue.updated_at, false )
+      const everySpellLoaded = slicedSpellReferences.reduce( (accumulator: boolean, currentValue: ISpell) => !!currentValue.updated_at, false )
       if(everySpellLoaded) {
         this.spells = slicedSpellReferences;
         this.isLoading = false;
@@ -57,7 +57,7 @@ export class SpellsComponent {
     this.store.dispatch(spellsActions.loadSpellsFromReferences(this.pagination));
   }
 
-  selectASpell(spell: Spell): void {
+  selectASpell(spell: ISpell): void {
     this.selectedSpell = spell;
   }
 }

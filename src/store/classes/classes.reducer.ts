@@ -1,10 +1,10 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 
 import { classesActions } from "./classes.actions";
-import { ClassDetailsInterface } from "../../models/class-details.interface";
+import { IClass } from "../../models/IClass";
 
 export interface ModelState {
-    classList: ClassDetailsInterface[];
+    classList: IClass[];
     loading: boolean;
 }
 
