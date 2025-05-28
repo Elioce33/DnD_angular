@@ -1,101 +1,111 @@
-import {ApiObjectReference} from './api.interfaces';
+import {ApiObject, ApiObjectReference, Url} from './api.interfaces';
 
-export interface IClass extends ApiObjectReference {
-  hit_die: number;
-  spells: string,
-  class_levels : string,
-  updated_at: Date,
-  proficiency_choices: ProficiencyChoices[],
-  proficiencies: Proficiencies[]
-  saving_throws: SavingThrows[]
-  starting_equipment: StartingEquipment[]
-  starting_equipment_options: StartingEquipmentOptions[]
-  multi_classing: MultiClassing
-  subclasses: ApiObjectReference[],
-  spellcasting: Spellcasting
+export interface IClass extends ApiObject {
+    hit_die?: number
+    class_levels?: Url
+    multi_classing?: I_MultiClassing
+    subclasses?: ApiObjectReference[]
+
+    spells?: Url
+    spellcasting?: I_SpellCasting
+
+    proficiency_choices?: I_ProficiencyChoices[]
+    proficiencies?: ApiObjectReference[]
+    saving_throws?: ApiObjectReference[]
+
+    starting_equipment?: I_Equipment[]
+    starting_equipment_options ?: Choices[]
 }
 
-interface ProficiencyChoices {
-  desc: string,
-  choose: number,
-  type: string,
-  from: ProficiencyChoicesFrom
+
+
+
+
+interface I_SpellCasting {
+    level: number
+    spellcasting_ability?: ApiObjectReference
+    info: ObjectDescription[]
 }
 
-interface ProficiencyChoicesFrom {
-  option_set_type: string
-  options: ProficiencyChoicesFromOption[]
+interface I_ProficiencyChoices extends Choices {
+    from: I_ProficiencyChoicesOptionFrom
 }
 
-interface ProficiencyChoicesFromOption {
-  option_type: string,
-  item: ApiObjectReference
+interface I_ProficiencyChoicesOptionFrom extends OptionArray {
+    options: OptionReference[]
 }
 
-export interface Proficiencies extends ApiObjectReference {}
-
-interface SavingThrows extends ApiObjectReference {}
-
-interface StartingEquipment {
-  equipment: ApiObjectReference,
-  quantity: number
+interface I_Equipment {
+    equipment: ApiObjectReference
+    quantity: number
 }
 
-interface StartingEquipmentOptions {
-  desc: string,
-  choose: number,
-  type: string,
-  from: StartingEquipmentOptionsFrom | StartingEquipmentOptionsFromEquipmentCategory
+interface I_MultiClassing {
+    prerequisite_options: Choices
+    prerequisites: I_AbilityPrerequisites[]
+    proficiencies: ApiObjectReference[]
 }
 
-interface StartingEquipmentOptionsFrom {
-  option_set_type: string | "options_array" | "equipment_category",
-  options: StartingEquipmentOptionsFromOption[] | StartingEquipmentOptionsFromOptionMultiple[] | StartingEquipmentOptionsFromOptionChoice[]
+interface I_AbilityPrerequisites {
+    ability_score: ApiObjectReference
+    minimum_score: number
 }
 
-interface StartingEquipmentOptionsFromEquipmentCategory {
-  option_set_type: "equipment_category",
-  equipment_category: ApiObjectReference,
+
+// ---------- Common interfaces ----------
+interface ObjectDescription {
+    name: string
+    desc: string
 }
 
-interface StartingEquipmentOptionsFromOption {
-  option_type: "counted_reference",
-  count: number,
-  of: ApiObjectReference
-  prerequisites?: { type: string, proficiency: ApiObjectReference }[]
-}
-
-interface StartingEquipmentOptionsFromOptionMultiple {
-  option_type: "multiple",
-  items: StartingEquipmentOptionsFromOption[]
-}
-
-interface StartingEquipmentOptionsFromOptionChoice {
-  option_type: "choice",
-  choice: {
+interface Choices {
     desc: string,
     choose: number,
-    type: string,
-    from: {
-      option_set_type: string,
-      equipment_category: ApiObjectReference
-    }
-  }
+    type: string | 'proficiencies' | 'equipment',
+    from: OptionSet<E_OptionSet>
 }
 
-interface MultiClassing {
-  prerequisites: {
-    ability_score: ApiObjectReference,
-    minimum_score: number
-  }[],
-  proficiencies: ApiObjectReference[]
+enum E_OptionSet {
+    ARRAY = 'options_array',
+    EQUIPMENT = 'equipment_category',
 }
 
-export interface Spellcasting {
-  level: number,
-  spellcasting_ability: ApiObjectReference,
-  info: {
-    name: string,
-    desc: string[]
-  }[]
+interface OptionSet<T extends E_OptionSet> {
+    option_set_type: T
+}
+
+interface EquipmentCategory extends OptionSet<E_OptionSet.EQUIPMENT> {
+    equipment_category: ApiObjectReference
+}
+
+export interface OptionArray extends OptionSet<E_OptionSet.ARRAY> {
+    options: OptionType<E_OptionType>[]
+}
+
+enum E_OptionType {
+    REFERENCE = 'reference',
+    COUNTED = 'counted_reference',
+    CHOICE = 'choice',
+    MULTIPLE =  'multiple',
+}
+
+interface OptionType<T extends E_OptionType> {
+    option_type: T
+}
+
+interface OptionReference extends OptionType<E_OptionType.REFERENCE> {
+    item: ApiObjectReference
+}
+
+interface OptionCountedReference extends OptionType<E_OptionType.COUNTED> {
+    count: number,
+    of: ApiObjectReference
+}
+
+interface OptionChoice extends OptionType<E_OptionType.CHOICE> {
+    choice: Choices
+}
+
+interface OptionMultiple extends OptionType<E_OptionType.MULTIPLE> {
+    items: OptionType<E_OptionType>[]
 }
