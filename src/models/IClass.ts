@@ -17,10 +17,6 @@ export interface IClass extends ApiObject {
     starting_equipment_options ?: Choices[]
 }
 
-
-
-
-
 interface I_SpellCasting {
     level: number
     spellcasting_ability?: ApiObjectReference
@@ -32,7 +28,7 @@ interface I_ProficiencyChoices extends Choices {
 }
 
 interface I_ProficiencyChoicesOptionFrom extends OptionArray {
-    options: OptionReference[]
+    options: (OptionReference | OptionChoice)[]
 }
 
 interface I_Equipment {
@@ -62,7 +58,7 @@ interface Choices {
     desc: string,
     choose: number,
     type: string | 'proficiencies' | 'equipment',
-    from: OptionSet<E_OptionSet>
+    from: OptionArray | EquipmentCategory
 }
 
 enum E_OptionSet {
@@ -79,7 +75,7 @@ interface EquipmentCategory extends OptionSet<E_OptionSet.EQUIPMENT> {
 }
 
 export interface OptionArray extends OptionSet<E_OptionSet.ARRAY> {
-    options: OptionType<E_OptionType>[]
+    options: (OptionReference | OptionCountedReference | OptionChoice | OptionMultiple)[]
 }
 
 enum E_OptionType {

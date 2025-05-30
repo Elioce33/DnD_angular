@@ -11,7 +11,7 @@ import { spellReducer } from '../store/spells/spells.reducer';
 import { spellsGetAll$, updateSpellFromReferences$} from '../store/spells/spells.effect';
 
 import {classReducer} from '../store/classes/classes.reducer';
-import {classesGetAll$} from '../store/classes/classes.effect';
+import {classesGetAll$, updateClassFromReferences$} from '../store/classes/classes.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,7 +31,8 @@ export const appConfig: ApplicationConfig = {
       spellsGetAll$,
       updateSpellFromReferences$,
       // Class effects
-      classesGetAll$
+      classesGetAll$,
+      updateClassFromReferences$
     })
   ]
 };

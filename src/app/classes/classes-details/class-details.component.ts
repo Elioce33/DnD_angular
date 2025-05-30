@@ -1,7 +1,5 @@
-import {Component, Input, input} from '@angular/core';
-import {ApiService} from '../../api.service';
-import {IClass, Proficiencies} from '../../../models/IClass';
-import {NgStyle} from '@angular/common';
+import {Component, Input} from '@angular/core';
+import {IClass} from '../../../models/IClass';
 
 @Component({
   selector: 'app-class-details',
@@ -10,36 +8,14 @@ import {NgStyle} from '@angular/common';
   styleUrl: './class-details.component.scss'
 })
 export class ClassDetailsComponent {
-    @Input() classIndex!: string;
-    classDetails: IClass | undefined;
-    selectedSpell: {name: string, desc:string[]} | undefined;
-    selectedProficiency: Proficiencies | undefined;
+    @Input() classDetails: IClass | undefined;
     classColor: string = '#FFF';
 
-    constructor(private api: ApiService) {}
-
     ngOnChanges(): void {
-        if(this.classIndex) {
-            this.api.getClassesDetails(this.classIndex).subscribe(response => {
-                this.classDetails = response;
-                this.selectedSpell = undefined;
-                this.selectedProficiency = undefined;
-
-                console.log(JSON.stringify(response));
-
-                // TO set "random" color based on the class name
-                this.classColor = this.stringToColour(this.classDetails.name);
-            });
+        if(this.classDetails) {
+            this.classColor = this.stringToColour(this.classDetails.name);
         }
     }
-
-  spellDetails(spellInfo: {name: string, desc:string[]}): void {
-    this.selectedSpell = spellInfo;
-  }
-
-  proficiencyDetails(proficiency: Proficiencies): void {
-    this.selectedProficiency = proficiency;
-  }
 
     /**
      * This function return a Hex value converted from the HASH of the string

@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {map, Observable, of, zip} from "rxjs";
+import {Observable, of, zip} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from "./app.tokens";
 import {IClass} from "../models/IClass";

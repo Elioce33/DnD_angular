@@ -11,18 +11,16 @@
                 <h2>Class list</h2>
                 <ul>
                     @for (dndClass of this.classes; track dndClass.index) {
-                        <li class="{{selectedClass === dndClass.index ? 'selected' : ''}}">
-                            <div class="classListItem">
-                                {{ dndClass.name }}
-                            </div>
-                            <button (click)="displayClass(dndClass.index)">show</button>
+                        <li [class]=" selectedClass?.index === dndClass.index ? 'selected' : '' ">
+                            <div class="classListItem">{{ dndClass.name }}</div>
+                            <button (click)="displayClass(dndClass)">show</button>
                         </li>
                     }
                 </ul>
             </div>
             <div class="details">
                 @if (this.selectedClass) {
-                    <app-class-details [classIndex]="this.selectedClass" />
+                    <app-class-details [classDetails]="this.selectedClass" />
                 }
             </div>
         </div>

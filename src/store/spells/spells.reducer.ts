@@ -21,10 +21,10 @@ export const spellReducer = createReducer(
       ...state,
       spellLoading: true
     })),
-    on(spellsActions.loadSpellsFromReferences, (state, pagination) => ({
-      ...state,
-      spellLoading: true
-    })),
+    // on(spellsActions.loadSpellsFromReferences, (state, pagination) => ({
+    //   ...state,
+    //   spellLoading: true
+    // })),
     on(spellsActions.loadSpellsSuccess, (state, { spells }) => ({
       ...state,
       spellList: spells,
