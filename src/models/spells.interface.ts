@@ -1,6 +1,11 @@
 import {ApiObjectReference} from './api.interfaces';
 
-export interface ISpell extends ApiObjectReference{
+
+export interface ISpellReference extends ApiObjectReference {
+    level: number
+}
+
+export interface ISpell extends ISpellReference {
   desc: string[],
   higher_level: string[],
   range: string,
@@ -9,7 +14,6 @@ export interface ISpell extends ApiObjectReference{
   duration: string;
   concentration: boolean,
   casting_time: string,
-  level: number,
   dc: {
     dc_type: ApiObjectReference,
     dc_success: string,

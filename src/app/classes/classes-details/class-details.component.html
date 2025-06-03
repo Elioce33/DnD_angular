@@ -47,12 +47,11 @@
             </div>
 
 
-            <div class="spell">
-                <div class="spellList">
-                    <h4>Spells list</h4>
-
-                </div>
-                @if (classDetails.spellcasting) {
+            @if (classDetails.spellcasting) {
+                <div class="spell">
+                    <div class="spellList">
+                        <app-class-spell-list [spellReferences]="spellReferences" />
+                    </div>
                     <div class="spellcasting">
                         <h4>Spell Casting information</h4>
                         @for (sp of classDetails.spellcasting.info; track sp.name) {
@@ -62,8 +61,8 @@
                             </div>
                         }
                     </div>
-                }
-            </div>
+                </div>
+            }
 
         </div>
     </div>

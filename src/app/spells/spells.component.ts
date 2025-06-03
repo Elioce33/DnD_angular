@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {Pagination} from '../../models/api.interfaces';
+import {Pagination} from '@models/api.interfaces';
 import {ApiService} from '../api.service';
-import {ISpell} from '../../models/spells.interface';
+import {ISpell} from '@models/spells.interface';
 import {Observable} from 'rxjs';
 import {SpellsArrayComponent} from './spells-array/spells-array.component';
 import {SpellDetailsComponent} from './spell-details/spell-details.component';
 import { Store } from '@ngrx/store';
-import { selectSpellList } from '../../store/spells/spells.selectors';
-import {spellsActions} from '../../store/spells/spells.actions';
+import { selectSpellList } from '@store/spells/spells.selectors';
+import {spellsActions} from '@store/spells/spells.actions';
 
 @Component({
   selector: 'app-spells',
@@ -45,7 +45,7 @@ export class SpellsComponent {
         this.spells = slicedSpellReferences;
         this.isLoading = false;
       } else {
-        this.store.dispatch(spellsActions.loadSpellsFromReferences(this.pagination));
+        this.store.dispatch(spellsActions.loadSpellsFromPagination(this.pagination));
       }
     })
 
@@ -54,7 +54,7 @@ export class SpellsComponent {
   displayPage(pagination: Pagination): void {
     this.pagination = pagination;
     this.isLoading = true;
-    this.store.dispatch(spellsActions.loadSpellsFromReferences(this.pagination));
+    this.store.dispatch(spellsActions.loadSpellsFromPagination(this.pagination));
   }
 
   selectASpell(spell: ISpell): void {

@@ -2,12 +2,19 @@ import {Component, Input} from '@angular/core';
 import {IClass} from '@models/class.interface';
 import {StartingEquipmentComponent} from './starting-equipment/starting-equipment.component';
 import {StartingEquipmentOptionComponent} from './starting-equipment-option/starting-equipment-option.component';
+import {ISpellReference} from '@models/spells.interface';
+import {Observable} from 'rxjs';
+import {ApiService} from '../../api.service';
+import {ApiListReference, ApiObjectReference} from '@models/api.interfaces';
+import {Store} from '@ngrx/store';
+import {ClassSpellListComponent} from './class-spell-list/class-spell-list.component';
 
 @Component({
   selector: 'app-class-details',
     imports: [
         StartingEquipmentComponent,
-        StartingEquipmentOptionComponent
+        StartingEquipmentOptionComponent,
+        ClassSpellListComponent
     ],
   templateUrl: './class-details.component.html',
   styleUrl: './class-details.component.scss'
@@ -15,9 +22,20 @@ import {StartingEquipmentOptionComponent} from './starting-equipment-option/star
 export class ClassDetailsComponent {
     @Input() classDetails: IClass | undefined;
     classColor: string = '#FFF';
+    spellList$: Observable<ApiListReference> = new Observable();
+    spellReferences: ISpellReference[] = [];
+
+    constructor(private api: ApiService, private store: Store) {}
 
     ngOnChanges(): void {
         if(this.classDetails) {
+            if(this.classDetails.spells) {
+                this.spellList$ = this.api.get<ApiListReference>(this.classDetails.spells);
+                this.spellList$.subscribe( (spellList: ApiListReference) => {
+                   this.spellReferences = spellList.results as ISpellReference[];
+                });
+            }
+
             this.classColor = this.stringToColour(this.classDetails.name);
         }
     }
