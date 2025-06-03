@@ -2,8 +2,8 @@ import {inject, Injectable} from '@angular/core';
 import {Observable, of, zip} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from "./app.tokens";
-import {IClass} from "../models/IClass";
-import {ApiListReference, ApiObjectReference, Pagination} from '../models/api.interfaces';
+import {IClass} from "@models/class.interface";
+import {ApiListReference, ApiObjectReference, Pagination} from '@models/api.interfaces';
 
 @Injectable({
   providedIn: 'root'

@@ -3,8 +3,8 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {map, switchMap, withLatestFrom} from 'rxjs';
 import {ApiService} from '../../app/api.service';
 import {classesActions} from './classes.actions';
-import { IClass } from '../../models/IClass';
-import {ApiListReference} from '../../models/api.interfaces';
+import { IClass } from '@models/class.interface';
+import {ApiListReference} from '@models/api.interfaces';
 
 // ------- Class Effect -------
 export const classesGetAll$ = createEffect(

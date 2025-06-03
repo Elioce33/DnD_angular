@@ -1,4 +1,5 @@
 import {ApiObject, ApiObjectReference, Url} from './api.interfaces';
+import {I_Equipment} from '@models/equipment.interface';
 
 export interface IClass extends ApiObject {
     hit_die?: number
@@ -13,8 +14,8 @@ export interface IClass extends ApiObject {
     proficiencies?: ApiObjectReference[]
     saving_throws?: ApiObjectReference[]
 
-    starting_equipment?: I_Equipment[]
-    starting_equipment_options ?: Choices[]
+    starting_equipment?: I_EquipmentWithQuantity[]
+    starting_equipment_options ?: T_StartingEquipmentOptions[]
 }
 
 interface I_SpellCasting {
@@ -31,8 +32,8 @@ interface I_ProficiencyChoicesOptionFrom extends OptionArray {
     options: (OptionReference | OptionChoice)[]
 }
 
-interface I_Equipment {
-    equipment: ApiObjectReference
+export interface I_EquipmentWithQuantity {
+    equipment: I_Equipment
     quantity: number
 }
 
@@ -46,6 +47,9 @@ interface I_AbilityPrerequisites {
     ability_score: ApiObjectReference
     minimum_score: number
 }
+
+export type T_StartingEquipmentOptions = Choices;
+
 
 
 // ---------- Common interfaces ----------

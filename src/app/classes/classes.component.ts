@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import {ClassDetailsComponent} from "./classes-details/class-details.component";
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectClassList } from '../../store/classes/classes.selectors';
-import { IClass } from '../../models/IClass';
-import {ApiObjectReference} from '../../models/api.interfaces';
-import {classesActions} from '../../store/classes/classes.actions';
+import { selectClassList } from '@store/classes/classes.selectors';
+import { IClass } from '@models/class.interface';
+import {classesActions} from '@store/classes/classes.actions';
 
 @Component({
   selector: 'app-classes',

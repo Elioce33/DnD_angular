@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 
 import { classesActions } from "./classes.actions";
-import { IClass } from "../../models/IClass";
+import { IClass } from "@models/class.interface";
 
 export interface ModelState {
     classList: IClass[];

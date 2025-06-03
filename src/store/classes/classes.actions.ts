@@ -1,6 +1,6 @@
 import {createActionGroup, emptyProps, props} from "@ngrx/store";
-import { IClass } from "../../models/IClass";
-import {ApiObjectReference} from '../../models/api.interfaces';
+import { IClass } from "@models/class.interface";
+import {ApiObjectReference} from '@models/api.interfaces';
 
 export const classesActions = createActionGroup({
   source: 'Classe',
