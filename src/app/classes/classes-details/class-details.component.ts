@@ -1,9 +1,14 @@
 import {Component, Input} from '@angular/core';
-import {IClass} from '../../../models/IClass';
+import {IClass} from '@models/class.interface';
+import {StartingEquipmentComponent} from './starting-equipment/starting-equipment.component';
+import {StartingEquipmentOptionComponent} from './starting-equipment-option/starting-equipment-option.component';
 
 @Component({
   selector: 'app-class-details',
-    imports: [],
+    imports: [
+        StartingEquipmentComponent,
+        StartingEquipmentOptionComponent
+    ],
   templateUrl: './class-details.component.html',
   styleUrl: './class-details.component.scss'
 })

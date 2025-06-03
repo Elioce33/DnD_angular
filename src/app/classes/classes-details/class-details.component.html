@@ -8,43 +8,31 @@
 
             <div class="equipments">
                 @if (classDetails.starting_equipment) {
-                    <div class="starting_equipment">
-                        <h4>Starting equipment</h4>
-                        <ul>
-                            @for (eqpmt of classDetails.starting_equipment; track eqpmt.equipment.index) {
-                                <li>{{eqpmt.equipment.name}} ({{eqpmt.quantity}})</li>
-                            }
-                        </ul>
-                    </div>
+                    <app-starting-equipment [starting_equipment]="classDetails.starting_equipment" />
                 }
                 @if (classDetails.starting_equipment_options) {
-                    <div class="starting_equipment_option">
-                        <h5>Options</h5>
-                        <ul>
-                            @for (seo of classDetails.starting_equipment_options; track seo.desc) {
-                                <li>{{seo.desc}}</li>
-                            }
-                        </ul>
-                    </div>
+                    <app-starting-equipment-option [starting_equipment_options]="classDetails.starting_equipment_options" />
                 }
             </div>
 
             <div class="proficiencies_choices">
                 @if(classDetails.proficiency_choices) {
                     <h4>Proficiency choices</h4>
-                    @for (pro of classDetails.proficiency_choices; track pro.desc) {
-                        <div>
-                            <p>{{pro.desc}}</p>
-                            <ul>
-                                @for (f of pro.from.options; track f) {
-                                    @switch (f.option_type) {
-                                        @case ('reference') { <li>{{f.item.name}}</li>   }
-                                        @case ('choice')    { <li>{{f.choice.desc}}</li> }
+                    <div class="list">
+                        @for (pro of classDetails.proficiency_choices; track pro.desc) {
+                            <div>
+                                <p>{{pro.desc}}</p>
+                                <ul>
+                                    @for (f of pro.from.options; track f) {
+                                        @switch (f.option_type) {
+                                            @case ('reference') { <li>{{f.item.name}}</li>   }
+                                            @case ('choice')    { <li>{{f.choice.desc}}</li> }
+                                        }
                                     }
-                                }
-                            </ul>
-                        </div>
-                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
                 }
             </div>
             <div class="proficiencies">
@@ -58,17 +46,24 @@
                 }
             </div>
 
-            @if (classDetails.spellcasting) {
-                <div class="spellcasting">
-                    <h4>Spell Casting information</h4>
-                    @for (sp of classDetails.spellcasting.info; track sp.name) {
-                        <div>
-                            <b>{{sp.name}}</b>
-                            <p>{{sp.desc}}</p>
-                        </div>
-                    }
+
+            <div class="spell">
+                <div class="spellList">
+                    <h4>Spells list</h4>
+
                 </div>
-            }
+                @if (classDetails.spellcasting) {
+                    <div class="spellcasting">
+                        <h4>Spell Casting information</h4>
+                        @for (sp of classDetails.spellcasting.info; track sp.name) {
+                            <div>
+                                <b>{{sp.name}}</b>
+                                <p>{{sp.desc}}</p>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
 
         </div>
     </div>

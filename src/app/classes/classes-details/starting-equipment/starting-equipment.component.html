@@ -1,0 +1,12 @@
+@if (!loading) {
+    <div class="starting_equipment">
+        <h4>Starting equipment</h4>
+        <ul>
+            @for (eqpmt of starting_equipment; track eqpmt.equipment.index) {
+                <li>
+                    <app-equipment [equipment]="eqpmt.equipment" [quantity]="eqpmt.quantity" />
+                </li>
+            }
+        </ul>
+    </div>
+}

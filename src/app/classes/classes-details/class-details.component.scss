@@ -13,6 +13,21 @@
     }
 
     .info {
+        .equipments {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .proficiencies_choices {
+
+            .list {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 10px;
+            }
+        }
+
 
         >div {
             border: 1px solid #ff6060; /*TODO: remove*/

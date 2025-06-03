@@ -1,0 +1,19 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    .equipment_name {
+        grid-column: 1/-1;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .quantity {
+
+    }
+
+    .cost {
+        text-align: right;
+    }
+}
