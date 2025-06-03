@@ -25,16 +25,18 @@
           </tbody>
         </table>
         <div class="paginationSelector">
-          <p>
-              <span>Total spells : {{spellCount}}</span> |
-              <span>Page size : {{this.pageSize}}</span> |
-              <span>Total pages : {{Math.ceil(spellCount / this.pageSize)}}</span>
-          </p>
-          <button *ngFor="let item of [].constructor(Math.ceil(spellCount / this.pageSize)); let i = index"
-                  (click)="selectAPage(i)"
-                  [ngClass]="{selectedPage : i === currentPage}" class="pageButton">
-              {{ i + 1 }}
-          </button>
+            <p>
+                <span>Total spells : {{spellCount}}</span> |
+                <span>Page size : {{this.pageSize}}</span> |
+                <span>Total pages : {{Math.ceil(spellCount / this.pageSize)}}</span>
+            </p>
+            <button (click)="selectPreviousPage()" [disabled]="currentPage === 0" class="pageButton">&lt;</button>
+            <button *ngFor="let item of [].constructor(Math.ceil(spellCount / this.pageSize)); let i = index"
+                    (click)="selectAPage(i)"
+                    [ngClass]="{selectedPage : i === currentPage}" class="pageButton">
+                {{ i + 1 }}
+            </button>
+            <button (click)="selectNextPage()" [disabled]="currentPage === totalPages" class="pageButton">&gt;</button>
         </div>
     }
 </div>

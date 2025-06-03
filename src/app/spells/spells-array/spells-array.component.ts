@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, Input, Output, SimpleChanges} from '@angular/core';
-import {ISpell} from '../../../models/spells.interface';
-import {Pagination} from '../../../models/api.interfaces';
+import {ISpell} from '@models/spells.interface';
+import {Pagination} from '@models/api.interfaces';
 import {NgClass, NgForOf} from '@angular/common';
 
 @Component({
@@ -23,6 +23,13 @@ export class SpellsArrayComponent {
   @Output() selectedPage: EventEmitter<Pagination> = new EventEmitter<Pagination>();
   @Output() selectedSpell: EventEmitter<ISpell> = new EventEmitter<ISpell>();
 
+  protected totalPages: number = 1;
+
+
+  ngOnInit(): void {
+      this.totalPages = Math.floor(this.spellCount / this.pageSize);
+  }
+
   selectASpell(spell: ISpell): void {
     this.selectedSpell.emit(spell);
   }
@@ -30,5 +37,15 @@ export class SpellsArrayComponent {
   selectAPage(page: number): void {
     this.currentPage = page;
     this.selectedPage.emit({offset: page*this.pageSize, limit: this.pageSize});
+  }
+
+  selectPreviousPage(): void {
+      if(this.currentPage === 0) return;
+      this.selectAPage(this.currentPage - 1);
+  }
+
+  selectNextPage(): void {
+      if(this.currentPage === this.totalPages) return;
+      this.selectAPage(this.currentPage + 1);
   }
 }
