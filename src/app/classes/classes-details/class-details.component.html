@@ -7,50 +7,33 @@
             </div>
 
             <div class="equipments">
-                @if (classDetails.starting_equipment) {
+                @if (classDetails.starting_equipment && classDetails.starting_equipment.length > 0) {
                     <app-starting-equipment [starting_equipment]="classDetails.starting_equipment" />
                 }
-                @if (classDetails.starting_equipment_options) {
+                @if (classDetails.starting_equipment_options && classDetails.starting_equipment_options.length > 0) {
                     <app-starting-equipment-option [starting_equipment_options]="classDetails.starting_equipment_options" />
                 }
             </div>
 
-            <div class="proficiencies_choices">
-                @if(classDetails.proficiency_choices) {
-                    <h4>Proficiency choices</h4>
-                    <div class="list">
-                        @for (pro of classDetails.proficiency_choices; track pro.desc) {
-                            <div>
-                                <p>{{pro.desc}}</p>
-                                <ul>
-                                    @for (f of pro.from.options; track f) {
-                                        @switch (f.option_type) {
-                                            @case ('reference') { <li>{{f.item.name}}</li>   }
-                                            @case ('choice')    { <li>{{f.choice.desc}}</li> }
-                                        }
-                                    }
-                                </ul>
-                            </div>
-                        }
-                    </div>
-                }
-            </div>
-            <div class="proficiencies">
-                @if(classDetails.proficiencies) {
+            @if(classDetails.proficiency_choices && classDetails.proficiency_choices.length > 0) {
+                <app-proficiency-choices [proficiency_choices]="classDetails.proficiency_choices" />
+            }
+            @if(classDetails.proficiencies && classDetails.proficiencies.length > 0) {
+                <div class="proficiencies">
                     <h4>Proficiencies</h4>
                     <ul>
                         @for (pro of classDetails.proficiencies; track pro.index) {
                             <li>{{pro.name}}</li>
                         }
                     </ul>
-                }
-            </div>
+                </div>
+            }
 
 
             @if (classDetails.spellcasting) {
                 <div class="spell">
                     <div class="spellList">
-                        <app-class-spell-list [spellReferences]="spellReferences" />
+                        <app-class-spell-list [spellReferences]="spellReferences" [className]="this.classDetails.name" />
                     </div>
                     <div class="spellcasting">
                         <h4>Spell Casting information</h4>

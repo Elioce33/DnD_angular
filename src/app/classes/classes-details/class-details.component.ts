@@ -8,13 +8,16 @@ import {ApiService} from '../../api.service';
 import {ApiListReference, ApiObjectReference} from '@models/api.interfaces';
 import {Store} from '@ngrx/store';
 import {ClassSpellListComponent} from './class-spell-list/class-spell-list.component';
+import { ProficiencyChoicesComponent } from './proficiency-choices/proficiency-choices.component';
+
 
 @Component({
   selector: 'app-class-details',
     imports: [
         StartingEquipmentComponent,
         StartingEquipmentOptionComponent,
-        ClassSpellListComponent
+        ClassSpellListComponent,
+        ProficiencyChoicesComponent
     ],
   templateUrl: './class-details.component.html',
   styleUrl: './class-details.component.scss'

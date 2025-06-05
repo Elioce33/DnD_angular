@@ -1,0 +1,18 @@
+<div class="proficiency_choices">
+    <h4>Proficiency choices</h4>
+    <div class="list">
+        @for (pro of proficiency_choices; track pro.desc) {
+            <div>
+                <p>{{pro.desc}}</p>
+                <ul>
+                    @for (f of pro.from.options; track f) {
+                        @switch (f.option_type) {
+                            @case ('reference') { <li>{{f.item.name}}</li>   }
+                            @case ('choice')    { <li>{{f.choice.desc}}</li> }
+                        }
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>

@@ -24,7 +24,7 @@ interface I_SpellCasting {
     info: ObjectDescription[]
 }
 
-interface I_ProficiencyChoices extends Choices {
+export interface I_ProficiencyChoices extends Choices {
     from: I_ProficiencyChoicesOptionFrom
 }
 

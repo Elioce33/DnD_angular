@@ -1,5 +1,6 @@
 <h4>Spells list</h4>
 <span>total: {{spellReferences.length}}</span>
+<span>Loading: {{spellLoading}}</span>
 <div class="levelSelector">
     <p>
         Select a level :
@@ -8,9 +9,39 @@
         }
     </p>
 </div>
-<ul>
-    @for (spell of spells; track spell.index) {
-        <!-- TODO : make clickable -->
-        <li>{{ spell.name }}</li>
-    }
-</ul>
+
+@if(!spellLoading) {
+    <table>
+        <caption>
+            Available spells for a lvl {{classLevel}} {{className}}
+        </caption>
+        <thead>
+            <tr>
+                <th id="name">Name</th>
+                <th id="lvl">lvl</th>
+                <th id="school">School</th>
+                <th id="casting_time">Casting time</th>
+                <th id="range">Range</th>
+                <th id="duration">Duration</th>
+                <th id="ingredients">Ingredients</th>
+                <th id="isConcentration">Need concentration</th>
+                <th id="isRitual">Need ritual</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (spell of spells; track spell.index) {
+                <tr>
+                    <td>{{spell.name}}</td>
+                    <td>{{spell.level}}</td>
+                    <td>{{spell.school?.name || ''}}</td>
+                    <td>{{spell.casting_time}}</td>
+                    <td>{{spell.range}}</td>
+                    <td>{{spell.duration}}</td>
+                    <td>{{spell.components}}</td>
+                    <td>{{spell.concentration ? 'yes' : 'no'}}</td>
+                    <td>{{spell.ritual ? 'yes' : 'no'}}</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,51 @@
+table, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+
+    table-layout: fixed;
+    width: 100%;
+
+    tr {
+        // width: 100%;
+    
+        #name {
+            min-width: 20%;
+        }
+    
+        #lvl {
+            width: 5%;
+        }
+    
+        #school {    
+            width: 15%;
+        }
+    
+        #casting_time {
+            width: 10%;
+        }
+    
+        #range {
+            width: 5%;
+        }
+    
+        #duration {
+            width: 12%;
+        }
+    
+        #ingredients {
+            width: 10%;
+        }
+    
+        #isConcentration {
+            width: 10%;
+        }
+    
+        #isRitual {
+            width: 5%;
+        }
+    }
+
+}
