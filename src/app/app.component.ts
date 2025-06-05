@@ -12,6 +12,13 @@ import { classesActions } from '../store/classes/classes.actions';
 })
 export class AppComponent implements OnInit {
   title = 'D&D api reader';
+  navPages = [
+    { title: 'Home', path: '/' },
+    { title: 'Classes', path: '/classes' },
+    { title: 'Spells', path: '/spells' },
+    // { title: 'Equipment', path: '/equipments' },
+    { title: 'About', path: '/about' }
+  ]
 
   constructor(private store: Store) {}
 

@@ -2,26 +2,12 @@
   <h1>D&D information here</h1>
   <nav>
     <ul>
-      <li>
-        <a class="ribbon" routerLink="/" routerLinkActive="active"
-           [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">Home</a>
-      </li>
-      <li>
-        <a class="ribbon" routerLink="/classes" routerLinkActive="active"
-           [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">Classes</a>
-      </li>
-      <li>
-        <a class="ribbon" routerLink="/spells" routerLinkActive="active"
-           [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">Spells</a>
-      </li>
-      <li>
-        <a class="ribbon" routerLink="/equipments" routerLinkActive="active"
-           [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">Equipment</a>
-      </li>
-      <li>
-        <a class="ribbon" routerLink="/about" routerLinkActive="active"
-           [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">About</a>
-      </li>
+      @for (page of navPages; track page.title) {
+        <li>
+          <a class="ribbon" [routerLink]="page.path" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">{{page.title}}</a>
+        </li>  
+      }
     </ul>
   </nav>
 </header>
